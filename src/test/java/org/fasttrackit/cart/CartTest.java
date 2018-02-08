@@ -12,12 +12,14 @@
 
 package org.fasttrackit.cart;
 
+import org.fasttrackit.AppConfig;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.SourceType;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -57,5 +59,31 @@ public class CartTest {
 
 
 
-}}
+}
+    @Test
+    public void addOneSpecificProductToCart() {
+        System.setProperty("webdriver.chrome.driver",
+                AppConfig.getChromeDriverPath());
+        WebDriver driver = new ChromeDriver();
+        driver.get(AppConfig.getSiteUrl());
+
+
+        Actions action = new Actions (driver);
+        WebElement women = driver.findElement(By.xpath("//a[text() = 'Women']"));
+
+
+
+        action.moveToElement(women).perform();
+        WebElement newArrivals = driver.findElement(By.xpath("//a[text() = 'New Arrivals']"));
+        action.moveToElement(newArrivals).click().perform();
+
+
+
+
+    }}
+
+
+
+     //   action.moveToElement(driver.findElement(By.linkText("New Arrivals"))).click().build().perform();}}
+
 

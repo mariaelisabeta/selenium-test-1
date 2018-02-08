@@ -12,6 +12,9 @@
 
 package org.fasttrackit.search;
 
+import org.fasttrackit.AppConfig;
+import org.fasttrackit.webviews.Header;
+import org.fasttrackit.webviews.ProductsGrid;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -20,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.SourceType;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -32,27 +36,32 @@ public class SimpleSearchTest {
     @Test
     public void simpleSearchWithOneKeyWord(){
         System.setProperty("webdriver.chrome.driver",
-                "C:\\drivers\\chromedriver.exe"); // copy paste erorii pe care am primit o si pasii de pe primul link
+                AppConfig.getChromeDriverPath());
         WebDriver driver = new ChromeDriver();
         //deschiderea unei pagini web
-        driver.get("https://fasttrackit.org/selenium-test/");
+        driver.get(AppConfig.getSiteUrl());
         String keyword = "vase";
-        driver.findElement(By.id("search")).sendKeys(keyword  + Keys.ENTER);
-        System.out.println("pressed enter in search field");
 
-        List<WebElement> productNames = driver.findElements(By.cssSelector(".product-name a"));
-        System.out.println("stored " + productNames.size() + " product names from search results.");
+        Header header = PageFactory.initElements(driver, Header.class);
+
+        header.search(keyword);
+        ProductsGrid productsGrid = PageFactory.initElements(driver, ProductsGrid.class);
+
+        header.getSearchField().sendKeys(keyword  + Keys.ENTER);
 
 
-        for(WebElement productname: productNames) {
+     // nu mai avem nevoie de lista asta pentru ca am scris mai sus mai usor    List<WebElement> productNames = driver.findElements(By.cssSelector(".product-name a"));
+        System.out.println("stored " + productsGrid.getProductNames().size() + " product names from search results.");
+
+
+        for(WebElement productname: productsGrid.getProductNames()) {
                         assertThat("some of the product names do not contain the searchedkeyword",
                                 productname.getText(), containsString (keyword.toUpperCase()));
 
         }
 
 
-
-
+//daca avem elemente care s diferite de la mediu la mediu, stocam in nu stiu ce de configurare. ex:  "C:\\drivers\\chromedriver.exe");
 
 
 
