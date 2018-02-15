@@ -48,6 +48,8 @@ public class CartTest {
         //by. name - input, button, orice
         //preferam id, name, classname, linktext. trb sa cautam atributul care e cel mai putin probabil sa fie schimbat in viitor.
 
+        //   action.moveToElement(driver.findElement(By.linkText("New Arrivals"))).click().build().perform();}}
+
 
         driver.findElement(By.xpath("//div[@class='product-info' and ./descendant::*[text()='Herald Glass Vase']]//button[contains(@class, 'btn-cart')]")).click();
       WebElement successMessageContainer = driver.findElement(By.cssSelector(".success-msg"));
@@ -61,38 +63,29 @@ public class CartTest {
 
 }
     @Test
-    public void addOneSpecificProductToCart() {
-        System.setProperty("webdriver.chrome.driver",
-                AppConfig.getChromeDriverPath());
-        WebDriver driver = new ChromeDriver();
-        driver.get(AppConfig.getSiteUrl());
-
-        Actions action = new Actions (driver);
-        WebElement women = driver.findElement(By.xpath("//a[text() = 'Women']"));
-
-        action.moveToElement(women).perform();
-        WebElement newArrivals = driver.findElement(By.xpath("//a[text() = 'New Arrivals']"));
-        action.moveToElement(newArrivals).click().perform();
-
-        WebElement knitTop = driver.findElement(By.xpath("//a[@href = 'https://fasttrackit.org/selenium-test/women/new-arrivals/elizabeth-knit-top-484.html']"));
-        action.moveToElement(knitTop). click().perform();
-
-        WebElement pinkButton = driver.findElement(By.xpath("//span[@class = 'swatch-label']"));
-        action.moveToElement(pinkButton). click().perform();
-
-        driver.findElement (By.xpath("//a[@name='l' and @title='L']//span[@class='swatch-label']")).click();
-
-        driver.findElement(By.xpath("//div[@class='add-to-cart-buttons']//button[@title='Add to Cart']")).click();
-
-  //      assertThat("assert that text corresponding to the label Color is pink", successMessageContainer.getText(),  );
-
-// View details for the first product, Select color Pink, Select size M, Add product to cart, Assert that the color of the product in cart is Pink and the size is M.
+//    public void addOneSpecificProductToCart() {
+//        System.setProperty("webdriver.chrome.driver",
+//                AppConfig.getChromeDriverPath());
+//        WebDriver driver = new ChromeDriver();
+//        driver.get(AppConfig.getSiteUrl());
+//        Actions action = new Actions (driver);
+//        WebElement women = driver.findElement(By.xpath("//a[text() = 'Women']"));
+//        action.moveToElement(women).perform();
+//        WebElement newArrivals = driver.findElement(By.xpath("//a[text() = 'New Arrivals']"));
+//        action.moveToElement(newArrivals).click().perform();
+//        WebElement knitTop = driver.findElement(By.xpath("//a[@href = 'https://fasttrackit.org/selenium-test/women/new-arrivals/elizabeth-knit-top-484.html']"));
+//        action.moveToElement(knitTop). click().perform();
+//        WebElement pinkButton = driver.findElement(By.xpath("//span[@class = 'swatch-label']"));
+//        action.moveToElement(pinkButton). click().perform();
+//        driver.findElement (By.xpath("//a[@name='l' and @title='L']//span[@class='swatch-label']")).click();
+//        driver.findElement(By.xpath("//div[@class='add-to-cart-buttons']//button[@title='Add to Cart']")).click();
+//  //      assertThat("assert that text corresponding to the label Color is pink", successMessageContainer.getText(),  );
+// View details for the first product, Select color Pink, Select size M, Add product to cart, Assert that the color of the product in cart is Pink and the size is M.}
 
 
-    }}
+}
 
 
 
-     //   action.moveToElement(driver.findElement(By.linkText("New Arrivals"))).click().build().perform();}}
 
 
